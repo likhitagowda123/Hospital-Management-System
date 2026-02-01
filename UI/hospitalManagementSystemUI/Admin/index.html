@@ -1,0 +1,282 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <script src="js/custom.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Morris Chart Css-->
+    <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">UNT Health Services</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
+                    <div class="email">UNT Health Services</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list"  id="nav-container">
+                    
+                </ul>
+            </div>
+            </div>
+            <script id="nav-template" type="text/x-handlebars-template">
+                {{#each menuItems}}
+                    <li>
+                        <a href="{{href}}">
+                            <i class="material-icons">{{icon}}</i>
+                            <span>{{title}}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </script>
+            <script src="nav.js"></script>
+        
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>DASHBOARD</h2>
+            </div>
+
+            <!-- Widgets -->
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-pink hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">people_outline</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Doctors</div>
+                            <div id="doctor-count" class="number count-to" data-from="0" data-to="5" data-speed="500" data-fresh-interval="20"><span id="span-doctor-count"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="info-box bg-cyan hover-expand-effect">
+                        <div class="icon">
+                            <i class="material-icons">wc</i>
+                        </div>
+                        <div class="content">
+                            <div class="text">Staff</div>
+                            <div id="staff-count" class="number count-to" data-from="0" data-to="5" data-speed="500" data-fresh-interval="20"><span id="span-staff-count"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Widgets -->
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="card">
+                        <div class="header ">
+                            <h2>
+                                Available Rooms
+                            </h2>
+                        </div>
+                        <div class="body bg-orange">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td scope="row">General Wards</th>
+                                        <td id="general_ward">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">ICU</th>
+                                        <td id="icu">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Operation Theater</th>
+                                        <td id="operation_theater">3</td>
+                                    </tr>
+                                    <tr>
+                                        <td scope="row">Emergency Room</th>
+                                        <td id="emergency_rooms">3</td>
+                                    </tr>                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery CountTo Plugin Js -->
+    <script src="plugins/jquery-countto/jquery.countTo.js"></script>
+
+    <!-- Morris Plugin Js -->
+    <script src="plugins/raphael/raphael.min.js"></script>
+    <script src="plugins/morrisjs/morris.js"></script>
+
+    <!-- ChartJs -->
+    <script src="plugins/chartjs/Chart.bundle.js"></script>
+
+    <!-- Sparkline Chart Plugin Js -->
+    <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+    <script src="js/pages/index.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: window.baseUrl + '/doctor/count',
+                type: 'GET',
+                success: function(data) {
+                    setTimeout(() => {
+                        $('#doctor-count').attr('data-to', data);
+                        $('#doctor-count').text(data);
+                    }, 500);
+                },
+                error: function(error) {
+                    alert("Error fetching doctors data");
+                }
+            });
+
+            $.ajax({
+                url: window.baseUrl + '/staff/count',
+                type: 'GET',
+                success: function(data) {
+                    setTimeout(() => {
+                        $('#staff-count').attr('data-to', data);
+                        $('#staff-count').text(data);
+                    }, 500);
+                },
+                error: function(error) {
+                    alert("Error fetching staffs data");
+                }
+            });
+
+            let generalWardCount = 0;
+            let icuCount = 0;
+            let operationTheaterCount = 0;
+            let emergencyRoomCount = 0;
+
+            $.ajax({
+                url: window.baseUrl + '/room/available',
+                type: 'GET',
+                success: function(data) {
+                    data.forEach(room => {
+                        if (room.type.name == "General Ward") {
+                            generalWardCount++;
+                        } else if (room.type.name == "ICU") {
+                            icuCount++;
+                        } else if (room.type.name == "Operation Theater") {
+                            operationTheaterCount++;
+                        } else if (room.type.name == "Emergency Room") {
+                            emergencyRoomCount++;
+                        }
+                    });
+                    $('#general_ward').text(generalWardCount);
+                    $('#icu').text(icuCount);
+                    $('#operation_theater').text(operationTheaterCount);
+                    $('#emergency_rooms').text(emergencyRoomCount);
+                },
+                error: function(error) {
+                    alert("Error fetching staffs data");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Billings</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+    
+    <!-- Sweet Alert Css -->
+    <link href="plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Bootstrap Select Css -->
+    <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">UNT Health Services</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
+                    <div class="email">UNT Health Services</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list"  id="nav-container">
+                    
+                </ul>
+            </div>
+            </div>
+            <script id="nav-template" type="text/x-handlebars-template">
+                {{#each menuItems}}
+                    <li>
+                        <a href="{{href}}">
+                            <i class="material-icons">{{icon}}</i>
+                            <span>{{title}}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </script>
+            <script src="nav.js"></script>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>BILLING</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>Bill Patient - <span id="patient-name"></span></h2>                            
+                        </div>
+                        <div class="body">
+                            <form id="form_validation" method="POST">
+                                <div class="row clearfix">
+                                    <div class="col-xs-6">
+                                        <p class="card-inside-title">Bill Date</p>
+                                        <div class="form-group">
+                                            <div class="form-line" id="bs_datepicker_container">
+                                                <input type="date" name="bill-date" class="form-control" placeholder="Please choose a date..." required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <p>
+                                            <b>Treatments</b>
+                                        </p>
+                                        <div id="treatments-div">
+                                            <select class="form-control show-tick" id="treatments" name="treatments" required multiple>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <p>
+                                            <b>Room Allocation Charges</b>
+                                        </p>
+                                        <div id="available-rooms-div">
+                                            <select class="form-control show-tick" id="available-rooms" name="available-rooms">
+                                                <option value="">-- Please select --</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn bg-red waves-effect" type="submit">SUBMIT</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Jquery Validation Plugin Css -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- JQuery Steps Plugin Js -->
+    <script src="../../plugins/jquery-steps/jquery.steps.js"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+    <script src="js/pages/tables/jquery-datatable.js"></script>
+    <script src="../../js/pages/forms/form-validation.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            let patient = null;
+            $.ajax({
+                url: window.baseUrl + '/patient/view/' + id,
+                type: 'GET',
+                success: function(data) {
+                    patient = data;
+                    $('#patient-name').text(data.firstName + " " + data.lastName);
+                },
+                error: function(error) {
+                    alert("Error fetching patient data");
+                }
+            });
+
+            // get medical procedures
+            $.ajax({
+                url: window.baseUrl + '/medical-procedure/list',
+                type: 'GET',
+                success: function(data) {
+                    const treatmentsDivElement = $('#treatments-div');
+                    const selectElement = $('#treatments');
+                    selectElement.empty();
+
+                    let optionsHtml = '';
+                    data.forEach(treatment => {
+                        optionsHtml += `<option value="${treatment.id}">${treatment.name} - $${treatment.cost}</option>`;
+                    });                    
+                    selectElement.append(optionsHtml);
+
+                    treatmentsDivElement.html(selectElement);
+                },
+                error: function(error) {
+                    alert("Error fetching medical procedures");
+                }
+            });
+
+            // get available rooms 
+            $.ajax({
+                url: window.baseUrl + '/room/available',
+                type: 'GET',
+                success: function(data) {
+                    const availableRoomsDivElement = $('#available-rooms-div');
+                    const selectElement = $('#available-rooms');
+                    selectElement.empty();
+
+                    let optionsHtml = '<option value="">-- Please select --</option>';
+                    let generalWardRooms = '';
+                    let ICURooms = '';
+                    let operationTheaterRooms = '';
+                    let emergenecyRooms = '';
+                    data.forEach(room => {
+                        if (room.type.name == "General Ward") {
+                            generalWardRooms += `<option value="${room.id}">${room.name} - $${room.type.costPerDay}</option>`;
+                        } else if (room.type.name == "ICU") {
+                            ICURooms += `<option value="${room.id}">${room.name} - $${room.type.costPerDay}</option>`;
+                        } else if (room.type.name == "Operation Theater") {
+                            operationTheaterRooms += `<option value="${room.id}">${room.name} - $${room.type.costPerDay}</option>`;
+                        } else if (room.type.name == "Emergency Room") {
+                            emergenecyRooms += `<option value="${room.id}">${room.name} - $${room.type.costPerDay}</option>`;
+                        }
+                    });
+                    optionsHtml += "<optgroup label='General Ward'>";
+                    optionsHtml += generalWardRooms;
+                    optionsHtml += "</optgroup>";
+                    optionsHtml += "<optgroup label='ICU'>";
+                    optionsHtml += ICURooms;
+                    optionsHtml += "</optgroup>";
+                    optionsHtml += "<optgroup label='Operation Theater'>";
+                    optionsHtml += operationTheaterRooms;
+                    optionsHtml += "</optgroup>";
+                    optionsHtml += "<optgroup label='Emergeny Room''>";
+                    optionsHtml += emergenecyRooms;
+                    optionsHtml += "</optgroup>";
+                    
+                    selectElement.append(optionsHtml);
+
+                    availableRoomsDivElement.html(selectElement);
+                },
+                error: function(error) {
+                    alert("Error fetching available rooms");
+                }
+            });
+
+            $('#form_validation').submit(function(event) {
+                event.preventDefault(); 
+
+                const billDate = $('input[name="bill-date"]').val();
+
+                const proceduresSelected = $('select[name="treatments"]').val();
+                const procedures = proceduresSelected.map(procedure => ({
+                    procedure: {
+                        id: parseInt(procedure),
+                    }
+                }));
+
+                const roomsSelected = $('select[name="available-rooms"]').val();
+                const rooms = [
+                    {
+                        room: {
+                            id: roomsSelected
+                        }
+                    }
+                ]
+
+                console.log(rooms);
+
+                $.ajax({
+                    url: window.baseUrl + '/billing/add', 
+                    type: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify({
+                        createdDate: billDate,
+                        patient: patient,
+                        status: {
+                            id: 2,
+                            name: "Unpaid" 
+                        },
+                        treatments: procedures,
+                        roomAllocations: rooms
+                    }),
+                    success: function(response) {
+                        console.log('Bill created successfully:', response);
+                        alert('Bill created successfully!');
+                        window.location.href = 'billing.html?id=' + response.id;
+                    },
+                    error: function(error) {
+                        // Handle errors, e.g., show an error message
+                        console.error('Error creating the Bill:', error);
+                        alert('Error creating the Bill. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

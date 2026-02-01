@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>Billings</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+    <script src="js/custom.js"></script>
+
+    <!-- Favicon-->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+    
+    <!-- Sweet Alert Css -->
+    <link href="plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
+    <!-- JQuery DataTable Css -->
+    <link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+</head>
+
+<body class="theme-red">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="preloader">
+                <div class="spinner-layer pl-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+    <!-- #END# Page Loader -->
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <!-- #END# Overlay For Sidebars -->
+    <!-- Top Bar -->
+    <nav class="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+                <a href="javascript:void(0);" class="bars"></a>
+                <a class="navbar-brand" href="index.html">UNT Health Services</a>
+            </div>
+        </div>
+    </nav>
+    <!-- #Top Bar -->
+    <section>
+        <!-- Left Sidebar -->
+        <aside id="leftsidebar" class="sidebar">
+            <!-- User Info -->
+            <div class="user-info">
+                <div class="image">
+                    <img src="images/user.png" width="48" height="48" alt="User" />
+                </div>
+                <div class="info-container">
+                    <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
+                    <div class="email">UNT Health Services</div>
+                    <div class="btn-group user-helper-dropdown">
+                        <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                        <ul class="dropdown-menu pull-right">
+                            <li><a href="javascript:void(0);"><i class="material-icons">person</i>Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- #User Info -->
+            <!-- Menu -->
+            <div class="menu">
+                <ul class="list"  id="nav-container">
+                    
+                </ul>
+            </div>
+            </div>
+            <script id="nav-template" type="text/x-handlebars-template">
+                {{#each menuItems}}
+                    <li>
+                        <a href="{{href}}">
+                            <i class="material-icons">{{icon}}</i>
+                            <span>{{title}}</span>
+                        </a>
+                    </li>
+                {{/each}}
+            </script>
+            <script src="nav.js"></script>
+            <!-- #Menu -->
+        </aside>
+        <!-- #END# Left Sidebar -->
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <h2>BILLING</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header bg-orange">
+                            <h2>
+                                Bill No: #<span id="billing-id"></span>
+                            </h2>
+                            <br>
+                            <div class="icon-and-text-button-demo">
+                                <button id="mark-paid-button" type="button" class="btn bg-green waves-effect">
+                                    <i class="material-icons">done_all</i>
+                                    <span>MARK PAID</span>
+                                </button>
+                                <button style="display: none;" id="delete-button" type="button" class="btn bg-red waves-effect">
+                                    <i class="material-icons">delete</i>
+                                    <span>DELETE BILL</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="body">
+                            <div class="body table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row">Bill Date:</th>
+                                            <td id="billing-date"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Billed To:</th>
+                                            <td id="billing-patient-name"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Total Cost:</th>
+                                            <td id="billing-total-cost"></td>
+                                        </tr> 
+                                        <tr>
+                                            <th scope="row">Bill Status:</th>
+                                            <td id="billing-status"></td>
+                                        </tr>                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Treatments
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="body table-responsive">
+                                <table class="table" id="treatmentsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Name</th>
+                                            <th>Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                                           
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row clearfix" id="room-allocations-div">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                Room Charges
+                            </h2>
+                        </div>
+                        <div class="body">
+                            <div class="body table-responsive">
+                                <table class="table" id="roomAllocationsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No</th>
+                                            <th>Room Type</th>
+                                            <th>Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                                                           
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jquery Core Js -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Jquery Validation Plugin Css -->
+    <script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- JQuery Steps Plugin Js -->
+    <script src="../../plugins/jquery-steps/jquery.steps.js"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="../../plugins/sweetalert/sweetalert.min.js"></script>
+    
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Jquery DataTable Plugin Js -->
+    <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+    <script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+    <script src="js/pages/tables/jquery-datatable.js"></script>
+    <script src="../../js/pages/forms/form-validation.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            $.ajax({
+                url: window.baseUrl + '/billing/view/' + id,
+                type: 'GET',
+                success: function(data) {
+                    $('#billing-id').text(data.id);
+                    $('#billing-date').text(formatDate(data.createdDate));
+                    $('#billing-patient-name').text(data.patient.firstName + " " + data.patient.lastName);
+                    $('#billing-total-cost').text("$" + data.totalCost);
+                    $('#billing-status').text(data.status.name);
+
+                    const treatmentsTableBody = $('#treatmentsTable tbody');
+                    treatmentsTableBody.empty();
+
+                    let treatmentSlNo = 1;
+                    data.treatments.forEach(treatment => {
+                        const row = $('<tr></tr>');
+                        row.append('<td>' + treatmentSlNo + '</td>');
+                        row.append('<td>' + treatment.procedure.name + '</td>');
+                        row.append('<td>$' + treatment.procedure.cost + '</td>');
+                        treatmentsTableBody.append(row);
+                        
+                        treatmentSlNo++;
+                    });
+
+                    const roomAllocationsTableBody = $('#roomAllocationsTable tbody');
+                    roomAllocationsTableBody.empty();
+
+                    let roomAllocationSlNo = 1;
+                    data.roomAllocations.forEach(roomAllocation => {
+                        const row = $('<tr></tr>');
+                        row.append('<td>' + roomAllocationSlNo + '</td>');
+                        row.append('<td>' + roomAllocation.room.type.name + '</td>');
+                        row.append('<td>$' + roomAllocation.room.type.costPerDay + '</td>');
+                        roomAllocationsTableBody.append(row);
+                        
+                        roomAllocationSlNo++;
+                    });
+
+                    // billing status
+                    if (data.status.name == "Paid") {
+                        hideFunction('mark-paid-button');
+                        hideFunction('delete-button');
+                    }
+
+                    if (data.roomAllocations.length == 0) {
+                        $('#room-allocations-div').hide();
+                    }
+ 
+                },
+                error: function(error) {
+                    alert("Error fetching patient data");
+                }
+            });
+
+            $('#mark-paid-button').on('click', function() {
+                if (confirm("Are you sure you want to mark this bill as paid?")) {
+                    $.ajax({
+                        url: window.baseUrl + '/billing/pay/' + id,
+                        type: 'PUT',
+                        success: function(response) {
+                            // Handle successful deletion
+                            alert('Bill paid successfully!');
+                            window.location.href = 'billing.html?id=' + id;
+                        },
+                        error: function(error) {
+                            // Handle error
+                            console.error('Error paying this bill:', error);
+                            alert('Error paying this bill. Please try again.');
+                        }
+                    });
+                }
+            });
+
+
+            $('#delete-button').on('click', function() {
+                if (confirm("Are you sure you want to delete this bill?")) {
+                    $.ajax({
+                        url: window.baseUrl + '/billing/delete/' + id,
+                        type: 'DELETE',
+                        success: function(response) {
+                            // Handle successful deletion
+                            alert('Bill deleted successfully!');
+                            window.location.href = 'billings.html';
+                        },
+                        error: function(error) {
+                            // Handle error
+                            console.error('Error deleting bill:', error);
+                            alert('Error deleting bill. Please try again.');
+                        }
+                    });
+                }
+            });
+        });
+
+        function hideFunction(id) {
+            var element = document.getElementById(id);
+            element.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>
